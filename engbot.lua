@@ -5,9 +5,9 @@ EngBot_WIPECONFIGONLOAD = 0;	-- for debugging, test it out on a new config every
 BINDING_HEADER_EngBot = "EngBot @ EngBags";
 BINDING_NAME_EB_TOGGLE = "Toggle Bot Window";
 EngBot_MAXBUTTONS = 144;
-EngBot_TOP_PADWINDOW = 75;
-EngBot_WINDOWBOTTOMPADDING_EDITMODE = 50;
-EngBot_WINDOWBOTTOMPADDING_NORMALMODE = 25;
+EngBot_TOP_PADWINDOW = 25;
+EngBot_WINDOWBOTTOMPADDING_EDITMODE = 0;
+EngBot_WINDOWBOTTOMPADDING_NORMALMODE = 0;
 EngBot_WindowBottomPadding = EngBot_WINDOWBOTTOMPADDING_NORMALMODE;
 EngBot_AtBot = 0;
 EngReplaceBot          = 1;
@@ -444,7 +444,7 @@ end
 function EngBot_CalcButtonSize(newsize)
 	local k = "button_size_opts";
 	-- constants
-	EngBags_BUTTONFRAME_X_PADDING = 2;
+	EngBags_BUTTONFRAME_X_PADDING = 1;
 	EngBags_BUTTONFRAME_Y_PADDING = 1;
 	EngBags_BUTTONFRAME_BUTTONWIDTH = newsize;
 	EngBags_BUTTONFRAME_BUTTONHEIGHT = newsize;
@@ -1646,7 +1646,7 @@ function EngBot_ItemButton_OnEnter()
 		itm["bagname"] = "Bot";
 	end
 
-	GameTooltip:AddLine("Container::"..itm["bagname"], 1,0,0 );
+	--GameTooltip:AddLine("Container::"..itm["bagname"], 1,0,0 );
 
         if ( EngBotConfig["tooltip_mode"] == 1 ) then
 		EngBags_ModifyItemTooltip(itm["bagnum"], itm["slotnum"], "GameTooltip", itm);
@@ -2836,16 +2836,8 @@ function EngBot_UpdateWindow()
 					cur_y,
 					(calc_dat["first_width"]*EngBags_BUTTONFRAME_WIDTH)+(2*EngBotConfig["frameXSpace"]),
 					(calc_dat["height"]*EngBags_BUTTONFRAME_HEIGHT)+(2*EngBotConfig["frameYSpace"]) );
-				barframe_one:SetBackdropColor(
-					EngBotConfig["bar_colors_"..barnum.."_background_r"],
-					EngBotConfig["bar_colors_"..barnum.."_background_g"],
-					EngBotConfig["bar_colors_"..barnum.."_background_b"],
-					EngBotConfig["bar_colors_"..barnum.."_background_a"] );
-				barframe_one:SetBackdropBorderColor(
-					EngBotConfig["bar_colors_"..barnum.."_border_r"],
-					EngBotConfig["bar_colors_"..barnum.."_border_g"],
-					EngBotConfig["bar_colors_"..barnum.."_border_b"],
-					EngBotConfig["bar_colors_"..barnum.."_border_a"] );
+				barframe_one:SetBackdropColor( 0.0, 0.0, 0.0, 0.5 );
+				barframe_one:SetBackdropBorderColor( 0.0, 0.0, 0.0, 0.5 );
 				else
 					barframe_one:Hide();
 				end
@@ -2868,16 +2860,8 @@ function EngBot_UpdateWindow()
 						cur_y,
 						(calc_dat["second_width"]*EngBags_BUTTONFRAME_WIDTH)+(2*EngBotConfig["frameXSpace"]),
 						(calc_dat["height"]*EngBags_BUTTONFRAME_HEIGHT)+(2*EngBotConfig["frameYSpace"]) );
-					barframe_two:SetBackdropColor(
-						EngBotConfig["bar_colors_"..(barnum+1).."_background_r"],
-						EngBotConfig["bar_colors_"..(barnum+1).."_background_g"],
-						EngBotConfig["bar_colors_"..(barnum+1).."_background_b"],
-						EngBotConfig["bar_colors_"..(barnum+1).."_background_a"] );
-					barframe_two:SetBackdropBorderColor(
-						EngBotConfig["bar_colors_"..(barnum+1).."_border_r"],
-						EngBotConfig["bar_colors_"..(barnum+1).."_border_g"],
-						EngBotConfig["bar_colors_"..(barnum+1).."_border_b"],
-						EngBotConfig["bar_colors_"..(barnum+1).."_border_a"] );
+					barframe_two:SetBackdropColor( 0.0, 0.0, 0.0, 0.5 );
+					barframe_two:SetBackdropBorderColor( 0.0, 0.0, 0.0, 0.5 );
 				else
 					barframe_two:Hide();
 				end
@@ -2891,16 +2875,8 @@ function EngBot_UpdateWindow()
 					cur_y,
 					(calc_dat["third_width"]*EngBags_BUTTONFRAME_WIDTH)+(2*EngBotConfig["frameXSpace"]),
 					(calc_dat["height"]*EngBags_BUTTONFRAME_HEIGHT)+(2*EngBotConfig["frameYSpace"]) );
-				barframe_three:SetBackdropColor(
-					EngBotConfig["bar_colors_"..(barnum+2).."_background_r"],
-					EngBotConfig["bar_colors_"..(barnum+2).."_background_g"],
-					EngBotConfig["bar_colors_"..(barnum+2).."_background_b"],
-					EngBotConfig["bar_colors_"..(barnum+2).."_background_a"] );
-				barframe_three:SetBackdropBorderColor(
-					EngBotConfig["bar_colors_"..(barnum+2).."_border_r"],
-					EngBotConfig["bar_colors_"..(barnum+2).."_border_g"],
-					EngBotConfig["bar_colors_"..(barnum+2).."_border_b"],
-					EngBotConfig["bar_colors_"..(barnum+2).."_border_a"] );
+				barframe_three:SetBackdropColor( 0.0, 0.0, 0.0, 0.5 );
+				barframe_three:SetBackdropBorderColor( 0.0, 0.0, 0.0, 0.5 );
 				else
 					barframe_three:Hide();
 				end

@@ -300,7 +300,7 @@
 					<Anchors>
 						<Anchor point="TOPLEFT">
 							<Offset>
-								<AbsDimension x="70" y="-9"/>
+								<AbsDimension x="10" y="-9"/>
 							</Offset>
 						</Anchor>
 					</Anchors>
