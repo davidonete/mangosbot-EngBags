@@ -10,7 +10,7 @@ EngBank_WINDOWBOTTOMPADDING_EDITMODE = 50;
 EngBank_WINDOWBOTTOMPADDING_NORMALMODE = 25;
 EngBank_WindowBottomPadding = EngBank_WINDOWBOTTOMPADDING_NORMALMODE;
 EngBank_AtBank = 0;
-EngReplaceBank          = 1;
+EngReplaceBank          = 0;
 local BankFrame_Saved = nil;
 
 EngBank_item_cache = { {}, {}, {}, {}, {}, {}, {} };	-- cache of all the items as they appear in bags
