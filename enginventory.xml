@@ -1,0 +1,164 @@
+<Ui xmlns="http://www.blizzard.com/wow/ui/"   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"   xsi:schemaLocation="http://www.blizzard.com/wow/ui/">
+	<Script file="default_items.lua"/>
+	<Script file="tooltip.lua"/>
+	<Script file="support_funcs.lua"/> 
+	<Script file="chat_cmd_handler.lua"/> 
+	<Script file="enginventory.lua"/> 
+	<Script file="ei_hooks.lua"/>
+	<Script file="localization.lua"/>
+
+
+	<GameTooltip name="EngInventory_tt" frameStrata="TOOLTIP" hidden="true" parent="UIParent" inherits="GameTooltipTemplate">
+		<Scripts>
+			<OnLoad>
+				this:SetOwner(UIParent, "ANCHOR_NONE");
+			</OnLoad>
+		</Scripts>
+	</GameTooltip>
+
+	<FontString name="EngInventory_BigFont"  font="Interface\AddOns\EngBags\DAB_CooldownFont.ttf" virtual="true">
+		<Shadow>
+			<Offset>
+				<AbsDimension x="1" y="-1"/>
+			</Offset>
+			<Color r="0" g="0" b="0"/>
+		</Shadow>
+		<FontHeight>
+			<AbsValue val="16"/>
+		</FontHeight>
+		<Color r="1" g="0" b="0.25"/>
+	</FontString>
+
+	<Texture name="EngInventory_ButtonBackgroundTemplate" file="Interface\AddOns\EngBags\skin\button_background" hidden="true" virtual="true">
+		<Size>
+			<AbsDimension x="64" y="64"/>
+		</Size>
+		<Anchors>
+			<Anchor point="TOPLEFT"/>
+		</Anchors>
+	</Texture>	
+
+	<Button name="EngInventory_ItemButtonTemplate" inherits="ItemButtonTemplate" hidden="true" virtual="true">
+		<Size>
+			<AbsDimension x="40" y="40"/>
+		</Size>
+		<Anchors>
+			<Anchor point="CENTER">
+				<Offset>
+					<AbsDimension x="0" y="0"/>
+				</Offset>
+			</Anchor>
+		</Anchors>
+		<Frames>
+			<Model name="$parent_Cooldown" inherits="CooldownFrameTemplate"/>
+		</Frames>
+		<Scripts>
+			<OnClick>
+				EngInventory_ItemButton_OnClick(arg1);
+			</OnClick>
+			<OnDragStart>
+				EngInventory_ItemButton_OnClick("LeftButton", 1);
+			</OnDragStart>
+			<OnReceiveDrag>
+				EngInventory_ItemButton_OnClick("LeftButton", 1);
+			</OnReceiveDrag>
+			<OnLoad>
+		        this:RegisterForClicks("LeftButtonUp", "RightButtonUp");
+				this:RegisterForDrag("LeftButton");
+			</OnLoad>
+			<OnHide>
+				if ( this.hasStackSplit and (this.hasStackSplit == 1) ) then
+					StackSplitFrame:Hide();
+				end
+			</OnHide>
+			<OnEnter>
+				EngInventory_ItemButton_OnEnter();
+			</OnEnter>
+			<OnLeave>
+				EngInventory_ItemButton_OnLeave();
+			</OnLeave>
+			<OnUpdate>
+				EngInventory_OnUpdate(arg1);
+			</OnUpdate>
+		</Scripts>
+	</Button>
+
+	<Button name="EngInventory_SlotTargetTemplate" inherits="ItemButtonTemplate" hidden="true" virtual="true">
+		<Size>
+			<AbsDimension x="40" y="40"/>
+		</Size>
+		<Anchors>
+			<Anchor point="BOTTOMRIGHT">
+				<Offset>
+					<AbsDimension x="0" y="0"/>
+				</Offset>
+			</Anchor>
+		</Anchors>
+		<Layers>
+			<Layer level="OVERLAY">
+				<FontString name="$parent_BigText" inherits="EngInventory_BigFont" justifyH="CENTER">
+					<Anchors>
+						<Anchor point="LEFT" relativePoint="LEFT">
+							<Offset><AbsDimension x="-2" y="0"/></Offset>
+						</Anchor>
+						<Anchor point="RIGHT" relativePoint="RIGHT">
+							<Offset><AbsDimension x="2" y="0"/></Offset>
+						</Anchor>
+					</Anchors>
+				</FontString>
+			</Layer>
+		</Layers>
+		<Scripts>
+			<OnClick>
+				EngInventory_SlotTargetButton_OnClick(arg1);
+			</OnClick>
+			<OnDragStart>
+				EngInventory_SlotTargetButton_OnClick("LeftButton", 1);
+			</OnDragStart>
+			<OnReceiveDrag>
+				EngInventory_SlotTargetButton_OnClick("LeftButton", 1);
+			</OnReceiveDrag>
+			<OnLoad>
+		        this:RegisterForClicks("LeftButtonUp", "RightButtonUp");
+				this:RegisterForDrag("LeftButton");
+			</OnLoad>
+			<OnHide>
+				if ( this.hasStackSplit and (this.hasStackSplit == 1) ) then
+					StackSplitFrame:Hide();
+				end
+			</OnHide>
+			<OnEnter>
+				EngInventory_SlotTargetButton_OnEnter();
+			</OnEnter>
+			<OnLeave>
+				EngInventory_SlotTargetButton_OnLeave();
+			</OnLeave>
+			<OnUpdate>
+				EngInventory_SlotTargetButton_OnUpdate(arg1);
+			</OnUpdate>
+		</Scripts>
+	</Button>
+
+	<Frame name="EngInventory_frame_bar_Template" toplevel="false" frameStrata="MEDIUM" movable="false" enableMouse="false" hidden="true" virtual="true"> 
+		<Size><AbsDimension x="200" y="46"/></Size>
+		<Anchors>
+			<Anchor point="BOTTOMRIGHT">
+				<Offset>
+					<AbsDimension x="0" y="0"/>
+				</Offset>
+			</Anchor>
+		</Anchors>
+
+		<Backdrop bgFile="Interface\Tooltips\UI-Tooltip-Background" edgeFile="Interface\Tooltips\UI-Tooltip-Border" tile="true">
+			<EdgeSize>
+				<AbsValue val="8"/>
+			</EdgeSize>
+			<TileSize>
+				<AbsValue val="8"/>
+			</TileSize>
+			<BackgroundInsets>
+				<AbsInset left="2" right="2" top="2" bottom="2"/>
+			</BackgroundInsets>
+		</Backdrop>
+	</Frame>
+</Ui>
