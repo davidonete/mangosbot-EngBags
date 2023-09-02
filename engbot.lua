@@ -877,6 +877,8 @@ function EngBot_GetReloadQuery()
     local query = "c"
     if (EngBot_Mode == "bot_bank_item") then
         query = "bank";
+	elseif (EngBot_Mode == "bot_equip_item") then
+        query = "e ?";
     elseif (EngBot_Mode == "bot_mail_item") then
         query = "mail ?";
     elseif (EngBot_Mode == "bot_spell_item") then
@@ -899,7 +901,7 @@ function EngBot_OnEvent(event)
         elseif (message == "=== Spells ===") then
             EngBot_ClearForMode("bot_spell_item")
         elseif (message == "=== Equip ===") then
-            EngBot_ClearForMode("bot_item")
+            EngBot_ClearForMode("bot_equip_item")
         end
         if (sender == name) then
 			EngBot_AtBot = 1;
@@ -911,6 +913,8 @@ function EngBot_OnEvent(event)
                 EngBotFrameTitleText:SetText(name.. "'s Mail")
             elseif (EngBot_Mode == "bot_spell_item") then
                 EngBotFrameTitleText:SetText(name.. "'s Tradeskill")
+			elseif (EngBot_Mode == "bot_equip_item") then
+                EngBotFrameTitleText:SetText(name.. "'s Equipment")
 			else
                 EngBotFrameTitleText:SetText(name.. "'s Bank")
 			end
@@ -2090,7 +2094,7 @@ function EngBot_frame_RightClickMenu_populate(level)
 	-------------------------------------------------------------------------------------------------
 	------------------------------- BOT ITEM CONTEXT MENU -----------------------------------------------
 	-------------------------------------------------------------------------------------------------
-	if (EngBot_RightClickMenu_mode == "bot_item") then
+    if (EngBot_RightClickMenu_mode == "bot_item" or EngBot_RightClickMenu_mode == "bot_equip_item") then
 		-- we have a right click on a button
 
 		bar = EngBot_RightClickMenu_opts["bar"];
@@ -2133,12 +2137,21 @@ function EngBot_frame_RightClickMenu_populate(level)
         info = { ["disabled"] = 1 };
         UIDropDownMenu_AddButton(info, level);
 
-        info = {
-            ["text"] = "Equip",
-            ["value"] = { ["bagnum"]=bagnum, ["slotnum"]=slotnum, ["command"]="e " },
-            ["func"] = EngBot_RightClick_Whisper
-        };
-        UIDropDownMenu_AddButton(info, level);
+        if (EngBot_RightClickMenu_mode == "bot_item") then
+            info = {
+                ["text"] = "Equipar",
+                ["value"] = { ["bagnum"]=bagnum, ["slotnum"]=slotnum, ["command"]="e " },
+                ["func"] = EngBot_RightClick_Whisper
+            };
+            UIDropDownMenu_AddButton(info, level);
+        else
+            info = {
+                ["text"] = "Desequipar",
+                ["value"] = { ["bagnum"]=bagnum, ["slotnum"]=slotnum, ["command"]="ue " },
+                ["func"] = EngBot_RightClick_Whisper
+            };
+            UIDropDownMenu_AddButton(info, level);
+        end
 
         info = {
             ["text"] = "Use",
@@ -2163,7 +2176,13 @@ function EngBot_frame_RightClickMenu_populate(level)
             ["func"] = EngBot_RightClick_Whisper
         };
         UIDropDownMenu_AddButton(info, level);
-
+		
+		info = {
+            ["text"] = "Desencantar",
+            ["value"] = { ["bagnum"]=bagnum, ["slotnum"]=slotnum, ["command"]="cast |cffffffff|Hspell:13262|h[Disenchant]|h|r " },
+            ["func"] = EngBot_RightClick_Whisper
+        };
+        UIDropDownMenu_AddButton(info, level);
 	end
 
     -------------------------------------------------------------------------------------------------
