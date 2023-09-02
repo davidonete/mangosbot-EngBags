@@ -906,13 +906,13 @@ function EngBot_OnEvent(event)
 			EngBot_resort_required = EngBot_MANDATORY;
 			EngBot_edit_mode = 0;
 			if (EngBot_Mode == "bot_item") then
-	   		    EngBotFrameTitleText:SetText(name.. "'s Inventory")
+	   		    EngBotFrameTitleText:SetText("Inventario de ".. name)
             elseif (EngBot_Mode == "bot_mail_item") then
-                EngBotFrameTitleText:SetText(name.. "'s Mail")
+                EngBotFrameTitleText:SetText("Correo de ".. name)
             elseif (EngBot_Mode == "bot_spell_item") then
-                EngBotFrameTitleText:SetText(name.. "'s Tradeskill")
+                EngBotFrameTitleText:SetText("Profesión de ".. name)
 			else
-                EngBotFrameTitleText:SetText(name.. "'s Bank")
+                EngBotFrameTitleText:SetText("Banco de ".. name)
 			end
 			SetPortraitTexture(EngBot_framePortrait, "npc");
             EngBot_PlayerName = sender;
@@ -2100,14 +2100,14 @@ function EngBot_frame_RightClickMenu_populate(level)
 		itm = EngBot_item_cache[bagnum][slotnum];
 
         info = {
-            ["text"] = "Add/Remove Trade (1)",
+            ["text"] = "Añadir/Quitar de Comerciar (1)",
             ["value"] = { ["bagnum"]=bagnum, ["slotnum"]=slotnum, ["command"]="t ", ["param"]="" },
             ["func"] = EngBot_RightClick_Whisper
         };
         UIDropDownMenu_AddButton(info, level);
 
         info = {
-            ["text"] = "Add/Remove Trade (All)",
+            ["text"] = "Añadir/Quitar de Comerciar (Todo)",
             ["value"] = { ["bagnum"]=bagnum, ["slotnum"]=slotnum, ["command"]="t ", ["param"]=" 6" },
             ["func"] = EngBot_RightClick_Whisper
         };
@@ -2117,14 +2117,14 @@ function EngBot_frame_RightClickMenu_populate(level)
         UIDropDownMenu_AddButton(info, level);
 
         info = {
-            ["text"] = "Put to bank",
+            ["text"] = "Poner en el banco",
             ["value"] = { ["bagnum"]=bagnum, ["slotnum"]=slotnum, ["command"]="bank " },
             ["func"] = EngBot_RightClick_Whisper
         };
         UIDropDownMenu_AddButton(info, level);
 
         info = {
-            ["text"] = "Send by mail",
+            ["text"] = "Enviar por correo",
             ["value"] = { ["bagnum"]=bagnum, ["slotnum"]=slotnum, ["command"]="sendmail " },
             ["func"] = EngBot_RightClick_Whisper
         };
@@ -2134,14 +2134,14 @@ function EngBot_frame_RightClickMenu_populate(level)
         UIDropDownMenu_AddButton(info, level);
 
         info = {
-            ["text"] = "Equip",
+            ["text"] = "Equipar",
             ["value"] = { ["bagnum"]=bagnum, ["slotnum"]=slotnum, ["command"]="e " },
             ["func"] = EngBot_RightClick_Whisper
         };
         UIDropDownMenu_AddButton(info, level);
 
         info = {
-            ["text"] = "Use",
+            ["text"] = "Usar",
             ["value"] = { ["bagnum"]=bagnum, ["slotnum"]=slotnum, ["command"]="u " },
             ["func"] = EngBot_RightClick_Whisper
         };
@@ -2151,14 +2151,14 @@ function EngBot_frame_RightClickMenu_populate(level)
         UIDropDownMenu_AddButton(info, level);
 
         info = {
-            ["text"] = "Sell",
+            ["text"] = "Vender",
             ["value"] = { ["bagnum"]=bagnum, ["slotnum"]=slotnum, ["command"]="s " },
             ["func"] = EngBot_RightClick_Whisper
         };
         UIDropDownMenu_AddButton(info, level);
 
         info = {
-            ["text"] = "Destroy",
+            ["text"] = "Tirar",
             ["value"] = { ["bagnum"]=bagnum, ["slotnum"]=slotnum, ["command"]="destroy " },
             ["func"] = EngBot_RightClick_Whisper
         };
@@ -2221,7 +2221,7 @@ function EngBot_frame_RightClickMenu_populate(level)
         itm = EngBot_item_cache[bagnum][slotnum];
 
         info = {
-            ["text"] = "Craft",
+            ["text"] = "Fabricar",
             ["value"] = { ["bagnum"]=bagnum, ["slotnum"]=slotnum, ["command"]="cast " },
             ["func"] = EngBot_RightClick_Whisper
         };
