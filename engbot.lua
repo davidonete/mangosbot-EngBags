@@ -2139,14 +2139,14 @@ function EngBot_frame_RightClickMenu_populate(level)
 
         if (EngBot_RightClickMenu_mode == "bot_item") then
             info = {
-                ["text"] = "Equipar",
+                ["text"] = "Equip",
                 ["value"] = { ["bagnum"]=bagnum, ["slotnum"]=slotnum, ["command"]="e " },
                 ["func"] = EngBot_RightClick_Whisper
             };
             UIDropDownMenu_AddButton(info, level);
         else
             info = {
-                ["text"] = "Desequipar",
+                ["text"] = "Unequip",
                 ["value"] = { ["bagnum"]=bagnum, ["slotnum"]=slotnum, ["command"]="ue " },
                 ["func"] = EngBot_RightClick_Whisper
             };
@@ -2178,7 +2178,7 @@ function EngBot_frame_RightClickMenu_populate(level)
         UIDropDownMenu_AddButton(info, level);
 		
 		info = {
-            ["text"] = "Desencantar",
+            ["text"] = "Disenchant",
             ["value"] = { ["bagnum"]=bagnum, ["slotnum"]=slotnum, ["command"]="cast |cffffffff|Hspell:13262|h[Disenchant]|h|r " },
             ["func"] = EngBot_RightClick_Whisper
         };
