@@ -3009,6 +3009,19 @@ function EngBot_UpdateWindow()
         EngBot_WindowIsUpdating = 0;
 end
 
+if (not waitTable) then
+	waitTable = {}
+end
+if (not waitFrame) then
+	waitFrame = nil
+end
+
+function tablelength(T)
+  local count = 0
+  for _ in pairs(T) do count = count + 1 end
+  return count
+end
+
 function wait(delay, func, arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8, arg9)
   if(type(delay)~="number" or type(func)~="function") then
     return false;
