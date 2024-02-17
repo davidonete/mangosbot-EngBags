@@ -900,7 +900,7 @@ function EngBot_OnEvent(event)
             EngBot_ClearForMode("bot_mail_item")
         elseif (message == "=== Spells ===") then
             EngBot_ClearForMode("bot_spell_item")
-        elseif (message == "=== Equip ===") then
+        elseif (message == "=== Equip ===" or message == "=== Equipment ===") then
             EngBot_ClearForMode("bot_equip_item")
         end
         if (sender == name) then
@@ -3007,6 +3007,19 @@ function EngBot_UpdateWindow()
 	EngBot_window_update_required = EngBot_NOTNEEDED;
 
         EngBot_WindowIsUpdating = 0;
+end
+
+if (not waitTable) then
+	waitTable = {}
+end
+if (not waitFrame) then
+	waitFrame = nil
+end
+
+function tablelength(T)
+  local count = 0
+  for _ in pairs(T) do count = count + 1 end
+  return count
 end
 
 function wait(delay, func, arg1, arg2, arg3, arg4, arg5, arg6, arg7, arg8, arg9)
