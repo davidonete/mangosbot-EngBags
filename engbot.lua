@@ -2199,8 +2199,15 @@ function EngBot_frame_RightClickMenu_populate(level)
         itm = EngBot_item_cache[bagnum][slotnum];
 
         info = {
-            ["text"] = "Get from bank",
+            ["text"] = "Sacar del banco",
             ["value"] = { ["bagnum"]=bagnum, ["slotnum"]=slotnum, ["command"]="bank -" },
+            ["func"] = EngBot_RightClick_Whisper
+        };
+        UIDropDownMenu_AddButton(info, level);
+		
+		info = {
+            ["text"] = "Enviar por correo",
+            ["value"] = { ["bagnum"]=bagnum, ["slotnum"]=slotnum, ["command"]="sendmail " },
             ["func"] = EngBot_RightClick_Whisper
         };
         UIDropDownMenu_AddButton(info, level);
@@ -2220,7 +2227,7 @@ function EngBot_frame_RightClickMenu_populate(level)
         itm = EngBot_item_cache[bagnum][slotnum];
 
         info = {
-            ["text"] = "Take",
+            ["text"] = "Recoger",
             ["value"] = { ["bagnum"]=bagnum, ["slotnum"]=slotnum, ["command"]="mail take " },
             ["func"] = EngBot_RightClick_Whisper
         };
