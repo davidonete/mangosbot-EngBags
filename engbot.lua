@@ -1060,7 +1060,7 @@ function EngBot_Add_item_cache(itemlink)
     if (EngBot_item_cache[bagnum][slotnum] == nil) then
         EngBot_item_cache[bagnum][slotnum] = {}
     end
-
+	
     itm = {
         ["itemlink"] = itemlink,
         ["itemid"] = itemid,
@@ -1083,10 +1083,8 @@ function EngBot_Add_item_cache(itemlink)
         -- misc junk
         ["search_match"] = EngBot_item_cache[bagnum][slotnum]["search_match"],
         ["gametooltip"] = EngBot_item_cache[bagnum][slotnum]["gametooltip"]
-        };
+    };
 
-
-    -- GameTooltip:SetHyperlink(itemlink);
     itm["itemname"], itm["itemlink2"], itm["itemRarity"], itm["itemMinLevel"], itm["itemtype"], itm["itemsubtype"], itm["itemstackcount"], itm["itemloc"], itm["texture"] = GetItemInfo(itemid);
     itm["itemcount"] = tonumber(cnt)
     itm["locked"] = 0
@@ -1098,6 +1096,9 @@ function EngBot_Add_item_cache(itemlink)
     itm["keywords"] = {}
     itm["itemlink_noninstance"] = itemlink
     itm["itemlink_override_key"] = itemlink
+	
+	GameTooltip:SetHyperlink(itm["itemlink2"]);
+	
     if (is_shot_bag) then
         itm["keywords"]["SHOT_BAG"]=1;
     end
