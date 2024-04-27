@@ -929,9 +929,11 @@ function EngBot_OnEvent(event)
                 end
             end
 		end
-	elseif (event == "TRADE_CLOSED" or event == "TRADE_UPDATE") then
+    elseif (event == "TRADE_UPDATE") then
         local name = GetUnitName("target")
         wait(2, function(command) SendChatMessage(command, "WHISPER", nil, GetUnitName("target")) end, EngBot_GetReloadQuery())
+	elseif (event == "TRADE_CLOSED") then
+		EngBot_frame:Hide();
 	elseif (event == "PLAYER_TARGET_CHANGED") then
         local name = GetUnitName("target")
         if (name ~= EngBot_PlayerName) then
@@ -1030,6 +1032,18 @@ function EngBot_Add_item_cache(itemlink)
     end
 
     local itemid = string.sub(itemlink, st + 6, string.find(itemlink, ":", st + 7) - 1);
+	
+	local itemName, itemlink2, itemRarity, itemMinLevel, itemtype, itemsubtype, itemstackcount, itemloc, texture = GetItemInfo(itemid);
+	if itemlink2 then
+		GameTooltip:SetHyperlink(itemlink2);
+	else
+		GameTooltip:SetHyperlink("item:" .. itemid .. ":0:0:0");
+		wait(2, function() 
+			DEFAULT_CHAT_FRAME:AddMessage("Delayed cache for " .. itemlink)
+			EngBot_Add_item_cache(itemlink) 
+		end);
+		return
+	end
 
 	local bag, slot, index;	-- used as "for loop" counters
 	local itm;		-- entry that will be written to the cache
@@ -1063,6 +1077,7 @@ function EngBot_Add_item_cache(itemlink)
 	
     itm = {
         ["itemlink"] = itemlink,
+		["itemlink2"] = itemlink2,
         ["itemid"] = itemid,
         ["bagnum"] = bagnum,
         ["slotnum"] = slotnum,
@@ -1082,10 +1097,16 @@ function EngBot_Add_item_cache(itemlink)
         ["itemlink_override_key"] = EngBot_item_cache[bagnum][slotnum]["itemlink_override_key"],
         -- misc junk
         ["search_match"] = EngBot_item_cache[bagnum][slotnum]["search_match"],
-        ["gametooltip"] = EngBot_item_cache[bagnum][slotnum]["gametooltip"]
+        ["gametooltip"] = EngBot_item_cache[bagnum][slotnum]["gametooltip"],
+		["itemRarity"] = itemRarity,
+		["itemMinLevel"] = itemMinLevel,
+		["itemtype"] = itemtype,
+		["itemsubtype"] = itemsubtype,
+		["itemstackcount"] = itemstackcount,
+		["itemloc"] = itemloc,
+		["texture"] = texture
     };
 
-    itm["itemname"], itm["itemlink2"], itm["itemRarity"], itm["itemMinLevel"], itm["itemtype"], itm["itemsubtype"], itm["itemstackcount"], itm["itemloc"], itm["texture"] = GetItemInfo(itemid);
     itm["itemcount"] = tonumber(cnt)
     itm["locked"] = 0
     itm["quality"] = itm["itemRarity"]
@@ -1096,8 +1117,6 @@ function EngBot_Add_item_cache(itemlink)
     itm["keywords"] = {}
     itm["itemlink_noninstance"] = itemlink
     itm["itemlink_override_key"] = itemlink
-	
-	GameTooltip:SetHyperlink(itm["itemlink2"]);
 	
     if (is_shot_bag) then
         itm["keywords"]["SHOT_BAG"]=1;
