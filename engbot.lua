@@ -1039,7 +1039,6 @@ function EngBot_Add_item_cache(itemlink)
 	else
 		GameTooltip:SetHyperlink("item:" .. itemid .. ":0:0:0");
 		wait(2, function() 
-			DEFAULT_CHAT_FRAME:AddMessage("Delayed cache for " .. itemlink)
 			EngBot_Add_item_cache(itemlink) 
 		end);
 		return
