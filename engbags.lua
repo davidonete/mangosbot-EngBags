@@ -68,7 +68,7 @@ function EngBags_StringChoices(value, choices_array)
                 return nil;
         end
 
-        for key,cvalue in choices_array do
+        for key,cvalue in pairs(choices_array) do
                 if (value == cvalue) then
                         found = 1;
                 end

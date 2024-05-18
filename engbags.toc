@@ -1,4 +1,4 @@
-## Interface: 30000
+## Interface: 20400
 ## Title: |CFFFF0000EngBags Continued
 ## Notes: AutoSorting Bags
 ## Authors: UniRing

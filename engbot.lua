@@ -1326,14 +1326,6 @@ function EngBot_UpdateButton(itemframe, itm)
                         end
                 end
 
-				-- Search Hilight
-				if (EngInventory_SearchFrame:GetText() ~= "" and itm["itemname"] ~= nil) then
-					if (EngBags_Sacha_LightSearch(itm["itemname"], EngInventory_SearchFrame:GetText()) == 0) then
-						itemframe_texture:SetVertexColor(1,1,1,0.15);
-						itemframe_font:SetVertexColor(1,1,1,0.5);
-					end
-				end
-
 				-- Bag Hilight
 				if (EngBot_HilightBag_Active > -10) then
 					if (itm["bagnum"] ~= EngBot_HilightBag_Active) then
@@ -1366,17 +1358,6 @@ function EngBot_UpdateButton(itemframe, itm)
 			itemframe_normaltexture:SetVertexColor(1,0,0, 0.5);
                 end
         end
-
-		-- Search Hilight
-		if (EngInventory_SearchFrame:GetText() ~= "" and itm["itemname"] ~= nil) then
-			if (EngBags_Sacha_LightSearch(itm["itemname"], EngInventory_SearchFrame:GetText()) == 0) then
-				itemframe_texture:SetVertexColor(1,1,1,0.15);
-				itemframe_font:SetVertexColor(1,1,1,0.5);
-				itemframe_bkgr:SetVertexColor(1,1,1,0.5);
-			else
-				itemframe_bkgr:SetVertexColor(1,1,0,1);
-			end
-		end
 
 		-- Bag Hilight
 		if (EngBot_HilightBag_Active > -10) then

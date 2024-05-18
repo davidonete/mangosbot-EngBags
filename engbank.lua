@@ -735,13 +735,13 @@ function EngBank_SetDefaultValues(re)
 		EngBankConfig["item_overrides"] = EngBags_DefaultItemOverrides;
 		EngBankConfig["item_search_list"] = EngBags_DefaultSearchList;
 
-		for key,value in EngBankConfig["item_search_list"] do
+		for key,value in pairs(EngBankConfig["item_search_list"]) do
 			if (string.sub(value[4], 1, 5) == "loc::") then
 				EngBankConfig["item_search_list"][key][4] = EBLocal[ string.sub(value[4],6) ];
 			end
 		end
 
-		for key,value in EBLocal["string_searches"] do
+		for key,value in pairs(EBLocal["string_searches"]) do
 			table.insert(EngBankConfig["item_search_list"], EngBags_DefaultSearchItemsINSERTTO,
 				{ value[1], "", value[2], "" } );
 		end
@@ -751,7 +751,7 @@ function EngBank_SetDefaultValues(re)
 
 	-- cleanup old overrides that shouldn't be in the config anymore
 	newEngBankConfig = EngBankConfig;
-	for key,value in EngBankConfig do
+	for key,value in pairs(EngBankConfig) do
 		if (string.find(key, "itemoverride--")) then
 			newEngBankConfig = EngBags_Table_RemoveKey(newEngBankConfig, key);
 		end
@@ -770,7 +770,7 @@ function EngBank_SetDefaultValues(re)
 	end
 
 	-- find matching catagories that are not assigned
-	for key,value in EngBankConfig["item_search_list"] do
+	for key,value in pairs(EngBankConfig["item_search_list"]) do
 		if (EngBankConfig["putinslot--"..value[1]] == nil) then
 			message("EngBank: Unassigned catagory: "..value[1].." -- It has been assigned to slot 1");
 			EngBankConfig["putinslot--"..value[1]] = 1;
@@ -788,7 +788,7 @@ function EngBank_SetTradeSkills()
 	EngBank_TRADE1 = "";
 	EngBank_TRADE2 = "";
 
-	for k,v in EngBagsConfig[EngBank_PLAYERID]["tradeskills"] do
+	for k,v in pairs(EngBagsConfig[EngBank_PLAYERID]["tradeskills"]) do
 		if ((k ~= EBLocal["Cooking"]) and (k ~= EBLocal["First Aid"])) then
 			EngBank_TRADE1 = EngBank_TRADE2;
 			EngBank_TRADE2 = k;
