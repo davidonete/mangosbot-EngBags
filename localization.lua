@@ -306,7 +306,7 @@ function EngBank_load_Localization(loadlang)
 	end
 
 	-- the string.gsub is there because the editor I'm using is being stupid and is randomly replaceing spaces with tabs.
-	for key,value in EngBank_LOCALIZATION do
+	for key,value in pairs(EngBank_LOCALIZATION) do
 		if (type(value[loadlang_num]) == "string") then
 			EngBags_PrintDEBUG("localization: "..key.." set to '"..value[loadlang_num].."'");
 			EBLocal[key] = string.gsub(value[loadlang_num], "\t", " ");
